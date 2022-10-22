@@ -1,0 +1,60 @@
+
+CREATE TABLE `cliente` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `cedula` double NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `concepto` (
+  `Id` bigint NOT NULL AUTO_INCREMENT,
+  `id_venta` bigint NOT NULL,
+  `cantidad` decimal(16,2) NOT NULL,
+  `precioUnitario` decimal(16,2) NOT NULL,
+  `importe` decimal(16,2) NOT NULL,
+  `id_producto` int NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  KEY `fk_productos_concepto` (`id_producto`),
+  KEY `fk_venta_concepto` (`id_venta`),
+  CONSTRAINT `fk_productos_concepto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`Id`),
+  CONSTRAINT `fk_venta_concepto` FOREIGN KEY (`id_venta`) REFERENCES `venta` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `productos` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `NombreProducto` varchar(255) NOT NULL,
+  `Precio` decimal(19,0) NOT NULL DEFAULT '0',
+  `Descuento` float NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `usuarios` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) NOT NULL,
+  `contraseña` varchar(256) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `usuario_UNIQUE` (`usuario`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `venta` (
+  `Id` bigint NOT NULL AUTO_INCREMENT,
+  `fecha` datetime NOT NULL,
+  `total` decimal(16,2) NOT NULL,
+  `id_cliente` int NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  KEY `fk_cliente_venta` (`id_cliente`),
+  CONSTRAINT `fk_cliente_venta` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `localdb_electrimax`.`usuarios`
+(`usuario`,
+`contraseña`,
+`nombre`)
+VALUES
+("prueba",
+"123",
+"prueba");
