@@ -56,5 +56,5 @@ INSERT INTO `localdb_electrimax`.`usuarios`
 `nombre`)
 VALUES
 ("prueba",
-"123",
-"daaad6e5604e8e17bd9f108d91e26afe6281dac8fda0091040a7a6d7bd9b43b5");
+"daaad6e5604e8e17bd9f108d91e26afe6281dac8fda0091040a7a6d7bd9b43b5",
+"prueba");
